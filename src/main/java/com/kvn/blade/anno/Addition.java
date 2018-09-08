@@ -14,5 +14,10 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD})
 public @interface Addition {
-	String value();
+
+	RequestTypeStrategy requestType();
+
+	RequestParamStrategy requestParamType();
+
+	String url();
 }
