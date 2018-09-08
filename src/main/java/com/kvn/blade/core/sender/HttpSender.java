@@ -1,16 +1,14 @@
 package com.kvn.blade.core.sender;
 
-import java.io.IOException;
-import java.util.Map;
-
+import com.alibaba.fastjson.JSON;
 import com.kvn.blade.anno.RequestParamStrategy;
+import com.kvn.blade.core.RemoteInfo;
 import okhttp3.*;
-import org.ipanda.common.utils.serialize.JsonHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.alibaba.fastjson.JSON;
-import com.kvn.blade.core.RemoteInfo;
+import java.io.IOException;
+import java.util.Map;
 
 /**
 * @author 郭智忠
@@ -52,6 +50,7 @@ public class HttpSender implements Sender {
 	 * @return
 	 */
 	private String doPostJson(String url, Object obj, Class<?> returnType) {
+
 		return null;
 	}
 
@@ -78,7 +77,6 @@ public class HttpSender implements Sender {
 			Call call = client.newCall(request);
 			Response response = client.newCall(request).execute();
 			return response.body().string();
-			//return JsonHelper.toBean(,returnType.getClass());
 		} catch (IOException e) {
 			throw new RuntimeException("发送http请求异常，url=" + url + ", msg=" + jsonMsg, e);
 		}

@@ -4,7 +4,7 @@ import javax.annotation.Resource;
 
 import com.czb.coupon.sdk.response.dto.CouponResponseDto;
 import com.kvn.rpc.dto.*;
-import com.kvn.rpc.service.HttpRpcServiceCouponTest;
+import com.kvn.rpc.service.HttpRpcService2;
 import org.ipanda.common.utils.serialize.JsonHelper;
 import org.ipanda.common.utils.wrap.Wrapper;
 import org.junit.Test;
@@ -28,7 +28,7 @@ public class MainTest extends SpringBaseTest {
 	@Resource
 	private HttpRpcService httpRpcService;
 	@Resource
-	private HttpRpcServiceCouponTest httpRpcServiceCouponTest;
+	private HttpRpcService2 httpRpcServiceCouponTest;
 
 	@Test
 	public void testFactoryBean(){

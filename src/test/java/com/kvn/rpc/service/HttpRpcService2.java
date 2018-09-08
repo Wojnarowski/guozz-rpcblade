@@ -13,7 +13,7 @@ import org.ipanda.common.utils.wrap.Wrapper;
  * 请求实例
  */
 @RpcService(protocol = "http", host = "couponws")
-public interface HttpRpcServiceCouponTest {
+public interface HttpRpcService2 {
 	
 	@Addition(requestType = RequestTypeStrategy.POST,requestParamType = RequestParamStrategy.FORM,url ="services/coupon/queryCouponByCouponId")
 	Wrapper<CouponResponseDto> queryCouponByCouponId(CouponRequestDto couponRequestDto);
