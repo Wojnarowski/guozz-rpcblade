@@ -6,7 +6,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 
 /**
- * @author wzy
+ * @author 郭智忠
  * @date 2017年11月17日 上午11:04:40
  */
 public class XmlEncoder implements Encoder {

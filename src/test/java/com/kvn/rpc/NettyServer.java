@@ -15,7 +15,7 @@ import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 
 /**
- * @author wzy
+ * @author 郭智忠
  * @date 2017年11月21日 下午5:40:39
  */
 public class NettyServer {

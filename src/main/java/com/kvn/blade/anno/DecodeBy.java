@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
-* @author wzy
+* @author 郭智忠
 * @date 2017年11月16日 下午5:49:10
 */
 @Retention(RetentionPolicy.RUNTIME)

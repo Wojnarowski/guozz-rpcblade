@@ -3,7 +3,7 @@ package com.kvn.blade.core.sender;
 import com.kvn.blade.core.RemoteInfo;
 
 /**
-* @author wzy
+* @author 郭智忠
 * @date 2017年11月16日 下午6:09:26
 */
 public interface Sender {

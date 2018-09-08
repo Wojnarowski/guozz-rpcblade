@@ -1,7 +1,7 @@
 package com.kvn.rpc.dto;
 
 /**
-* @author wzy
+* @author 郭智忠
 * @date 2017年11月13日 下午5:20:53
 */
 public class CouponRequest {

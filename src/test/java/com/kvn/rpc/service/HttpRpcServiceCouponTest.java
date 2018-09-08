@@ -9,6 +9,7 @@ import org.ipanda.common.utils.wrap.Wrapper;
 
 /**
  * 郭智忠
+ * 请求实例
  */
 @RpcService(protocol = "http", host = "couponws")
 public interface HttpRpcServiceCouponTest {

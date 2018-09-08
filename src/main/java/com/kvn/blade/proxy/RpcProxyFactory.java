@@ -19,7 +19,7 @@ import com.kvn.blade.core.sender.Sender;
 import com.kvn.blade.util.AdditionPropParser;
 
 /**
- * @author wzy
+ * @author 郭智忠
  * @date 2017年11月14日 上午10:04:36
  */
 public class RpcProxyFactory {

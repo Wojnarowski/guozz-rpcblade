@@ -14,7 +14,7 @@ import org.springframework.core.type.filter.AnnotationTypeFilter;
 import com.kvn.blade.anno.RpcService;
 
 /**
- * @author wzy
+ * @author 郭智忠
  * @date 2017年11月13日 下午6:06:31
  */
 public class RpcScanner extends ClassPathBeanDefinitionScanner {

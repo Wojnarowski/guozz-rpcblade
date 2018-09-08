@@ -5,7 +5,7 @@ import com.kvn.rpc.dto.XmlRequest;
 import com.kvn.rpc.dto.XmlResponse;
 
 /**
- * @author wzy
+ * @author 郭智忠
  * @date 2017年11月13日 下午5:18:10
  */
 @RpcService(protocol = "netty", host = "localhost:8091")

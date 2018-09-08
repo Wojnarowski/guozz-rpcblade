@@ -10,7 +10,7 @@ import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 /**
-* @author wzy
+* @author 郭智忠
 * @date 2017年11月13日 下午5:57:34
 */
 public class RpcScannerConfigurer implements BeanDefinitionRegistryPostProcessor,InitializingBean {

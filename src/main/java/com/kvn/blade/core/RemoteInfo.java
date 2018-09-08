@@ -3,7 +3,7 @@ package com.kvn.blade.core;
 import java.util.Properties;
 
 /**
-* @author wzy
+* @author 郭智忠
 * @date 2017年11月17日 下午5:00:17
 */
 public class RemoteInfo {

@@ -14,7 +14,7 @@ import com.kvn.rpc.service.NettyRpcService;
 import com.kvn.rpc.service.SocketRpcService;
 
 /**
-* @author wzy
+* @author 郭智忠
 * @date 2017年11月13日 下午5:27:29
 */
 
@@ -45,12 +45,12 @@ public class MainTest extends SpringBaseTest {
 		System.out.println("===>" + JSON.toJSONString(response));
 	}
 	
-	@Test
-	public void testHttp(){
-		FooRequest request = new FooRequest();
-		FooResponse response = httpRpcService.call1030(request);
-		System.out.println("===>" + JSON.toJSONString(response));
-	}
+//	@Test
+//	public void testHttp(){
+//		FooRequest request = new FooRequest();
+//		FooResponse response = httpRpcService.call1030(request);
+//		System.out.println("===>" + JSON.toJSONString(response));
+//	}
 	
 	@Test
 	public void testNetty(){

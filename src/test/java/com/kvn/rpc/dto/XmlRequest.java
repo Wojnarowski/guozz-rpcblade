@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import com.kvn.blade.anno.EncodeBy;
 
 /**
-* @author wzy
+* @author 郭智忠
 * @date 2017年11月13日 下午5:20:53
 */
 @XmlAccessorType(XmlAccessType.FIELD)

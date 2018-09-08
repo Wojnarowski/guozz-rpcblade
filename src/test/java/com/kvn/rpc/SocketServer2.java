@@ -9,7 +9,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
- * @author wzy
+ * @author 郭智忠
  * @date 2017年11月20日 上午11:27:06
  */
 public class SocketServer2 {

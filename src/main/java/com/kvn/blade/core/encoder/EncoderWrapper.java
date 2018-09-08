@@ -1,7 +1,7 @@
 package com.kvn.blade.core.encoder;
 
 /**
- * @author wzy
+ * @author 郭智忠
  * @date 2017年12月14日 下午2:37:32
  */
 public class EncoderWrapper implements Encoder {

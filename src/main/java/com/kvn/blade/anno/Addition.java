@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 /**
  * 附加参数
  * 
- * @author wzy
+ * @author 郭智忠
  * @date 2017年11月14日 下午3:52:45
  */
 @Retention(RetentionPolicy.RUNTIME)

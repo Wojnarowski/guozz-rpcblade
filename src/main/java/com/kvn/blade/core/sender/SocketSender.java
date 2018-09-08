@@ -10,7 +10,7 @@ import java.net.Socket;
 import com.kvn.blade.core.RemoteInfo;
 
 /**
- * @author wzy
+ * @author 郭智忠
  * @date 2017年11月17日 上午11:25:25
  */
 public class SocketSender implements Sender {

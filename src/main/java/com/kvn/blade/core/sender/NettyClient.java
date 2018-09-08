@@ -18,7 +18,7 @@ import io.netty.handler.codec.string.StringEncoder;
 import io.netty.util.CharsetUtil;
 
 /**
- * @author wzy
+ * @author 郭智忠
  * @date 2017年11月20日 上午11:07:37
  */
 public class NettyClient extends SimpleChannelInboundHandler<String> {

@@ -1,21 +1,18 @@
 package com.kvn.blade.core.sender;
 
 import java.io.IOException;
+import java.util.Map;
 
+import com.kvn.blade.anno.RequestParamStrategy;
+import okhttp3.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSON;
 import com.kvn.blade.core.RemoteInfo;
 
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
-
 /**
-* @author wzy
+* @author 郭智忠
 * @date 2017年11月17日 上午11:25:25
 */
 public class HttpSender implements Sender {
@@ -24,20 +21,67 @@ public class HttpSender implements Sender {
 	private static final MediaType JSON_TYPE = MediaType.parse("application/json; charset=utf-8");
 
 	@Override
-	public String send(Object msg, RemoteInfo remoteInfo) {
-		String type = remoteInfo.getAdditionProps().getProperty("type");
+	public String send(Object obj, RemoteInfo remoteInfo) {
+		String requestType = remoteInfo.getAdditionProps().getProperty("requestType");
+		String requestParamType = remoteInfo.getAdditionProps().getProperty("requestParamType");
 		String url = getUrl(remoteInfo);
-		
-		logger.info("post http request, url:{}, msg:{}", url, JSON.toJSONString(msg));
-		if(type == null || "GET".equals(type.toUpperCase())){
-			return doGet(url, msg);
+		logger.info("请求方法 请求类型={}",requestType);
+		logger.info("请求方法 请求参数类型={}",requestParamType);
+		logger.info("请求方法 请求url={}",url);
+		logger.info("请求参数 obj:{}", JSON.toJSONString(obj));
+
+		if(requestType == null || "GET".equals(requestType.toUpperCase())){
+			return doGet(url, obj);
 		} else {
-			return doPost(url, msg);
+			if(requestParamType.equals(RequestParamStrategy.FORM.toString())){
+				return doPostForm(url, obj);
+			}else{
+				return doPostJson(url, obj);
+			}
+
 		}
 	}
 
-	private String doPost(String url, Object msg) {
-		String jsonMsg = JSON.toJSONString(msg);
+	/**
+	 * post json请求
+	 * @param url
+	 * @param obj
+	 * @return
+	 */
+	private String doPostJson(String url, Object obj) {
+		return null;
+	}
+
+	/**
+	 * post form表单请求
+	 * @param url
+	 * @param obj
+	 * @return
+	 */
+	private String doPostForm(String url, Object obj) {
+		String jsonMsg = JSON.toJSONString(obj);
+		FormBody.Builder formbody = new FormBody.Builder();
+		Map<String,String> map=JSON.parseObject(jsonMsg,Map.class);
+		for (Object key : map.keySet()) {
+			formbody.add(String.valueOf(key), String.valueOf(map.get(key)));
+		}
+		FormBody body = formbody.build();
+		Request request = new Request.Builder()
+				.url(url)
+				.post(body)
+				.build();
+		try {
+			Call call = client.newCall(request);
+			Response response = client.newCall(request).execute();
+			return response.body().string();
+		} catch (IOException e) {
+			throw new RuntimeException("发送http请求异常，url=" + url + ", msg=" + jsonMsg, e);
+		}
+
+	}
+
+	private String doPost(String url, Object obj) {
+		String jsonMsg = JSON.toJSONString(obj);
 		RequestBody body = RequestBody.create(JSON_TYPE, jsonMsg);
 		Request request = new Request.Builder().url(url).post(body).build();
 		try {

@@ -3,7 +3,7 @@ package com.kvn.rpc.dto;
 import com.kvn.blade.anno.DecodeBy;
 
 /**
-* @author wzy
+* @author 郭智忠
 * @date 2017年11月13日 下午5:23:20
 */
 @DecodeBy(DecodeBy.JSON)

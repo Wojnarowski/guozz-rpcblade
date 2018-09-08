@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 import com.kvn.blade.core.decoder.Decoder;
 
 /**
- * @author wzy
+ * @author 郭智忠
  * @date 2017年11月16日 下午6:02:42
  */
 public class ExtensionLoader<T> {

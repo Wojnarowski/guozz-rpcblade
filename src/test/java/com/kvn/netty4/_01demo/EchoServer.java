@@ -9,7 +9,7 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 
 /**
- * @author wzy
+ * @author 郭智忠
  * @date 2017年11月27日 下午5:43:08
  */
 public class EchoServer {
