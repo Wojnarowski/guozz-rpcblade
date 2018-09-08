@@ -1,0 +1,3 @@
+netty=com.kvn.blade.core.sender.NettySender
+http=com.kvn.blade.core.sender.HttpSender
+socket=com.kvn.blade.core.sender.SocketSender

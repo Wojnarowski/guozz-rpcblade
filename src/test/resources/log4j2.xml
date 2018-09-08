@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="300">
+	<!-- 变量配置 -->
+	<properties>
+		<property name="LOG_HOME">logs/rpcdemo/</property>
+		<property name="FILE_NAME">mylog</property>
+		<property name="logPattern"
+			value="%date|%thread|%-5p|%.60c.%M:%line--%msg %ex %n"></property>
+	</properties>
+	<!-- @see http://blog.csdn.net/autfish/article/details/51203709 -->
+	<!-- @see http://logging.apache.org/log4j/2.x/articles.html -->
+
+	<!-- appender配置 -->
+	<appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="${logPattern}" />
+		</Console>
+		
+		<RollingRandomAccessFile name="RollingRandomAccessFile"
+			fileName="${LOG_HOME}/${FILE_NAME}.log"
+			filePattern="${LOG_HOME}/$${date:yyyy-MM}/${FILE_NAME}-%d{yyyy-MM-dd HH-mm}-%i.log">
+			<PatternLayout pattern="${dzlogPattern}" />
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1" />
+				<SizeBasedTriggeringPolicy size="10 MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="20" />
+		</RollingRandomAccessFile>
+		
+	</appenders>
+	
+	
+	<Loggers>
+		<logger name="com.ctrip" level="debug" />
+		
+		<Root level="info">
+			<AppenderRef ref="Console" />
+			<!-- <AppenderRef ref="RollingRandomAccessFile" /> -->
+		</Root>
+	</Loggers>
+</Configuration>

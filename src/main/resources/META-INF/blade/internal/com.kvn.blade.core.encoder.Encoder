@@ -1,0 +1,3 @@
+xml=com.kvn.blade.core.encoder.XmlEncoder
+json=com.kvn.blade.core.encoder.JsonEncoder
+wrapper=com.kvn.blade.core.encoder.EncoderWrapper
