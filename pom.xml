@@ -14,6 +14,9 @@
 		<okhttp.version>3.8.0</okhttp.version>
 		<netty.version>4.0.24.Final</netty.version>
 		<junit.version>4.12</junit.version>
+		<ipanda-common.version>3.2.2</ipanda-common.version>
+		<ipanda-common2.version>2.0.2</ipanda-common2.version>
+		<coupon-service-sdk.version>1.1.8-SNAPSHOT</coupon-service-sdk.version>
 	</properties>
 
 	<dependencies>
@@ -108,6 +111,51 @@
 			<version>${spring.version}</version>
 		</dependency>
 		<!-- test end -->
+		<dependency>
+			<groupId>org.ipanda.common</groupId>
+			<artifactId>ipanda-common-sdk</artifactId>
+			<version>${ipanda-common.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.ipanda.common</groupId>
+			<artifactId>ipanda-common-proxy</artifactId>
+			<version>${ipanda-common.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.ipanda.common</groupId>
+			<artifactId>ipanda-common-utils</artifactId>
+			<version>${ipanda-common.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.ipanda.common</groupId>
+			<artifactId>ipanda-common-dao</artifactId>
+			<version>${ipanda-common.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.ipanda.common</groupId>
+			<artifactId>ipanda-common-manager</artifactId>
+			<version>${ipanda-common.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.ipanda.common</groupId>
+			<artifactId>ipanda-common-web</artifactId>
+			<version>${ipanda-common.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.ipanda.common2</groupId>
+			<artifactId>ipanda-common2-file</artifactId>
+			<version>${ipanda-common2.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.ipanda.common2</groupId>
+			<artifactId>ipanda-common2-log4j2-perf4j</artifactId>
+			<version>${ipanda-common2.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.czb.coupon</groupId>
+			<artifactId>coupon-service-sdk</artifactId>
+			<version>${coupon-service-sdk.version}</version>
+		</dependency>
 
 	</dependencies>
 
