@@ -18,15 +18,15 @@
 
 1. 调用http服务
 ```java
-@RpcService(protocol = "http", host = "172.16.21.28")
-public interface HttpRpcService {
+@RpcService(protocol = "http", host = "couponws")
+public interface HttpRpcService2 {
 	
-	@Addition("type=post&url=mockjsdata/35/refund/api/query/querySettlement")
-	FooResponse call1030(FooRequest request);
+	@Addition(requestType = RequestTypeStrategy.POST,requestParamType = RequestParamStrategy.FORM,url ="services/coupon/queryCouponByCouponId")
+	Wrapper<CouponResponseDto> queryCouponByCouponId(CouponRequestDto couponRequestDto);
 
 }
 ```
-参考：[HttpRpcService.java](src/test/java/com/kvn/rpc/service/HttpRpcService.java)
+参考：[HttpRpcService.java](src/test/java/com/kvn/rpc/service/HttpRpcService2.java)
 
 2. 调用socket服务
 ```java
