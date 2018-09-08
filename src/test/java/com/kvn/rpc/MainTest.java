@@ -2,8 +2,10 @@ package com.kvn.rpc;
 
 import javax.annotation.Resource;
 
+import com.czb.coupon.sdk.response.dto.CouponResponseDto;
 import com.kvn.rpc.dto.*;
 import com.kvn.rpc.service.HttpRpcServiceCouponTest;
+import org.ipanda.common.utils.serialize.JsonHelper;
 import org.ipanda.common.utils.wrap.Wrapper;
 import org.junit.Test;
 
@@ -67,8 +69,8 @@ public class MainTest extends SpringBaseTest {
     public void testGetCouponById(){
 		CouponRequestDto dto = new CouponRequestDto();
 		dto.setCouponId(25146);
-		String response = httpRpcServiceCouponTest.queryCouponByCouponId(dto);
-        System.out.println("===>" + JSON.toJSONString(response));
+		Wrapper<CouponResponseDto> response = httpRpcServiceCouponTest.queryCouponByCouponId(dto);
+        System.out.println("===>" + JsonHelper.toJson(response));
     }
 
 }

@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
+import org.ipanda.common.utils.serialize.JsonHelper;
 import org.springframework.util.Assert;
 
 import com.alibaba.fastjson.JSON;
@@ -55,7 +56,7 @@ public class RpcProxyFactory {
 			
 			RpcService sendType = method.getDeclaringClass().getAnnotation(RpcService.class);
 			Addition addition = method.getAnnotation(Addition.class);
-			RemoteInfo remoteInfo = new RemoteInfo(sendType.host(), AdditionPropParser.parse(addition));
+			RemoteInfo remoteInfo = new RemoteInfo(sendType.host(), AdditionPropParser.parse(addition),method.getReturnType());
 			Encoder targetEncoder = getEncoder(args[0]);
 			Sender targetSender = getSender(sendType);
 			Decoder targetDecoder = getDecoder(method);
@@ -69,9 +70,14 @@ public class RpcProxyFactory {
 			if(targetEncoder != null){
 				msg = targetEncoder.encode(msg);
 			}
-			
+
 			String rlt = targetSender.send(msg, remoteInfo);
-			
+
+			if(sendType.protocol().equals("http")){
+				return JsonHelper.toBean(rlt,method.getReturnType());
+			}
+
+
 			if(targetDecoder == null){
 				return rlt;
 			}

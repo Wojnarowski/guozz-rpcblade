@@ -25,7 +25,7 @@ public class SocketSender implements Sender {
 			pw.write(msg.toString());
 			pw.flush();
 			socket.shutdownOutput();
-			
+
 			// 接收返回
 			BufferedReader br = new BufferedReader(new InputStreamReader(is));
 			StringBuffer info = new StringBuffer();

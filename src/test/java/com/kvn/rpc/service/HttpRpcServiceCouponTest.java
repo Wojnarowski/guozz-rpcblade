@@ -1,5 +1,6 @@
 package com.kvn.rpc.service;
 
+import com.czb.coupon.sdk.response.dto.CouponResponseDto;
 import com.kvn.blade.anno.Addition;
 import com.kvn.blade.anno.RequestParamStrategy;
 import com.kvn.blade.anno.RequestTypeStrategy;
@@ -15,6 +16,6 @@ import org.ipanda.common.utils.wrap.Wrapper;
 public interface HttpRpcServiceCouponTest {
 	
 	@Addition(requestType = RequestTypeStrategy.POST,requestParamType = RequestParamStrategy.FORM,url ="services/coupon/queryCouponByCouponId")
-	String queryCouponByCouponId(CouponRequestDto couponRequestDto);
+	Wrapper<CouponResponseDto> queryCouponByCouponId(CouponRequestDto couponRequestDto);
 
 }

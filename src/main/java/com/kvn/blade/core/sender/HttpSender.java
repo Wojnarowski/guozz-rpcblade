@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.kvn.blade.anno.RequestParamStrategy;
 import okhttp3.*;
+import org.ipanda.common.utils.serialize.JsonHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,15 +29,16 @@ public class HttpSender implements Sender {
 		logger.info("请求方法 请求类型={}",requestType);
 		logger.info("请求方法 请求参数类型={}",requestParamType);
 		logger.info("请求方法 请求url={}",url);
+		logger.info("请求方法 请求返回类型returnType={}",remoteInfo.getReturnType());
 		logger.info("请求参数 obj:{}", JSON.toJSONString(obj));
 
 		if(requestType == null || "GET".equals(requestType.toUpperCase())){
 			return doGet(url, obj);
 		} else {
 			if(requestParamType.equals(RequestParamStrategy.FORM.toString())){
-				return doPostForm(url, obj);
+				return doPostForm(url, obj,remoteInfo.getReturnType());
 			}else{
-				return doPostJson(url, obj);
+				return doPostJson(url, obj,remoteInfo.getReturnType());
 			}
 
 		}
@@ -46,9 +48,10 @@ public class HttpSender implements Sender {
 	 * post json请求
 	 * @param url
 	 * @param obj
+	 * @param returnType
 	 * @return
 	 */
-	private String doPostJson(String url, Object obj) {
+	private String doPostJson(String url, Object obj, Class<?> returnType) {
 		return null;
 	}
 
@@ -56,9 +59,10 @@ public class HttpSender implements Sender {
 	 * post form表单请求
 	 * @param url
 	 * @param obj
+	 * @param returnType
 	 * @return
 	 */
-	private String doPostForm(String url, Object obj) {
+	private String doPostForm(String url, Object obj, Class<?> returnType) {
 		String jsonMsg = JSON.toJSONString(obj);
 		FormBody.Builder formbody = new FormBody.Builder();
 		Map<String,String> map=JSON.parseObject(jsonMsg,Map.class);
@@ -74,6 +78,7 @@ public class HttpSender implements Sender {
 			Call call = client.newCall(request);
 			Response response = client.newCall(request).execute();
 			return response.body().string();
+			//return JsonHelper.toBean(,returnType.getClass());
 		} catch (IOException e) {
 			throw new RuntimeException("发送http请求异常，url=" + url + ", msg=" + jsonMsg, e);
 		}
