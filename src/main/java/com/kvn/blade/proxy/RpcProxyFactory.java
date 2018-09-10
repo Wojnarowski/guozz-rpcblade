@@ -1,14 +1,5 @@
 package com.kvn.blade.proxy;
 
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
-
-import com.kvn.blade.scan.RpcHostConfigurer;
-import org.ipanda.common.utils.config.SpringHelper;
-import org.ipanda.common.utils.serialize.JsonHelper;
-import org.springframework.util.Assert;
-
 import com.alibaba.fastjson.JSON;
 import com.kvn.blade.anno.Addition;
 import com.kvn.blade.anno.DecodeBy;
@@ -19,13 +10,25 @@ import com.kvn.blade.core.RemoteInfo;
 import com.kvn.blade.core.decoder.Decoder;
 import com.kvn.blade.core.encoder.Encoder;
 import com.kvn.blade.core.sender.Sender;
+import com.kvn.blade.scan.RpcHostConfigurer;
 import com.kvn.blade.util.AdditionPropParser;
+import org.ipanda.common.utils.config.SpringHelper;
+import org.ipanda.common.utils.serialize.JsonHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.util.Assert;
+
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 
 /**
  * @author 郭智忠
  * @date 2017年11月14日 上午10:04:36
  */
 public class RpcProxyFactory {
+
+	private static final Logger logger = LoggerFactory.getLogger(RpcProxyFactory.class);
 
 	public static <T> T newInstance(Class<T> rpcInterface) {
 		return (T) Proxy.newProxyInstance(rpcInterface.getClassLoader(), new Class[] { rpcInterface }, new RpcProxy());
@@ -49,11 +52,11 @@ public class RpcProxyFactory {
 				return method.getDeclaringClass();
 			}
 			Assert.isTrue(args == null || args.length == 1, "[rpcMethod:" + methodName + "]参数个数只能有一个");
-			
-			System.out.println("class:" + method.getDeclaringClass().getName());
-			System.out.println("method:" + method.getName());
-			System.out.println("args:" + JSON.toJSONString(args));
-			System.out.println("return:" + method.getReturnType().getName());
+
+			logger.info("class:" + method.getDeclaringClass().getName());
+			logger.info("method:" + method.getName());
+			logger.info("args:" + JSON.toJSONString(args));
+			logger.info("return:" + method.getReturnType().getName());
 			
 			
 			RpcService sendType = method.getDeclaringClass().getAnnotation(RpcService.class);

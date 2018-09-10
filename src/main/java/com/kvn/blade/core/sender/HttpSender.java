@@ -3,7 +3,10 @@ package com.kvn.blade.core.sender;
 import com.alibaba.fastjson.JSON;
 import com.kvn.blade.anno.RequestParamStrategy;
 import com.kvn.blade.core.RemoteInfo;
+import com.kvn.blade.core.sender.support.HttpSendService;
+import com.kvn.blade.util.HttpSendServiceEnum;
 import okhttp3.*;
+import org.ipanda.common.utils.config.SpringHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,75 +33,20 @@ public class HttpSender implements Sender {
 		logger.info("请求方法 请求返回类型returnType={}",remoteInfo.getReturnType());
 		logger.info("请求参数 obj:{}", JSON.toJSONString(obj));
 
+		HttpSendService httpSendService =null;
 		if(requestType == null || "GET".equals(requestType.toUpperCase())){
-			return doGet(url, obj);
+			httpSendService=(HttpSendService)SpringHelper.getBean(HttpSendServiceEnum.HttpGetForm.getHttpSendServiceClass());
 		} else {
 			if(requestParamType.equals(RequestParamStrategy.FORM.toString())){
-				return doPostForm(url, obj,remoteInfo.getReturnType());
+				httpSendService=(HttpSendService)SpringHelper.getBean(HttpSendServiceEnum.HttpPostForm.getHttpSendServiceClass());
 			}else{
-				return doPostJson(url, obj,remoteInfo.getReturnType());
+				httpSendService=(HttpSendService)SpringHelper.getBean(HttpSendServiceEnum.HttpPostJson.getHttpSendServiceClass());
 			}
 
 		}
+		return httpSendService.doSend(url,obj,remoteInfo.getReturnType());
 	}
 
-	/**
-	 * post json请求
-	 * @param url
-	 * @param obj
-	 * @param returnType
-	 * @return
-	 */
-	private String doPostJson(String url, Object obj, Class<?> returnType) {
-
-		return null;
-	}
-
-	/**
-	 * post form表单请求
-	 * @param url
-	 * @param obj
-	 * @param returnType
-	 * @return
-	 */
-	private String doPostForm(String url, Object obj, Class<?> returnType) {
-		String jsonMsg = JSON.toJSONString(obj);
-		FormBody.Builder formbody = new FormBody.Builder();
-		Map<String,String> map=JSON.parseObject(jsonMsg,Map.class);
-		for (Object key : map.keySet()) {
-			formbody.add(String.valueOf(key), String.valueOf(map.get(key)));
-		}
-		FormBody body = formbody.build();
-		Request request = new Request.Builder()
-				.url(url)
-				.post(body)
-				.build();
-		try {
-			Call call = client.newCall(request);
-			Response response = client.newCall(request).execute();
-			return response.body().string();
-		} catch (IOException e) {
-			throw new RuntimeException("发送http请求异常，url=" + url + ", msg=" + jsonMsg, e);
-		}
-
-	}
-
-	private String doPost(String url, Object obj) {
-		String jsonMsg = JSON.toJSONString(obj);
-		RequestBody body = RequestBody.create(JSON_TYPE, jsonMsg);
-		Request request = new Request.Builder().url(url).post(body).build();
-		try {
-			Response response = client.newCall(request).execute();
-			return response.body().string();
-		} catch (IOException e) {
-			throw new RuntimeException("发送http请求异常，url=" + url + ", msg=" + jsonMsg, e);
-		}
-	}
-
-	private String doGet(String url, Object msg) {
-		// TODO Auto-generated method stub
-		throw new RuntimeException("暂未实现");
-	}
 
 	private String getUrl(RemoteInfo remoteInfo) {
 		String url = remoteInfo.getAdditionProps().getProperty("url");

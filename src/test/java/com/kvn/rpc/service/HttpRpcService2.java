@@ -12,7 +12,7 @@ import org.ipanda.common.utils.wrap.Wrapper;
  * 郭智忠
  * 请求实例
  */
-@RpcService(protocol = "http", host = "aa",configHost = true)
+@RpcService(protocol = "http", host = "couponws",configHost = false)
 public interface HttpRpcService2 {
 	
 	@Addition(requestType = RequestTypeStrategy.POST,
