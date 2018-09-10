@@ -36,7 +36,12 @@ public class HttpPostFormSendServiceImpl implements HttpSendService {
 
             Call call = client.newCall(request);
             Response response = client.newCall(request).execute();
-            return response.body().string();
+            if(response.code()==200){
+                return response.body().string();
+            }else{
+                throw new RuntimeException("发送http请求返回异常，url=" + url + ", msg=" + JsonHelper.toJson(paramObject));
+            }
+
         } catch (IOException e) {
             throw new RuntimeException("发送http请求异常，url=" + url + ", msg=" + JsonHelper.toJson(paramObject), e);
         }
