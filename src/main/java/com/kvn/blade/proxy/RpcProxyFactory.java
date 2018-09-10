@@ -4,6 +4,8 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
+import com.kvn.blade.scan.RpcHostConfigurer;
+import com.kvn.blade.util.SpringContextUtils;
 import org.ipanda.common.utils.serialize.JsonHelper;
 import org.springframework.util.Assert;
 
@@ -56,7 +58,7 @@ public class RpcProxyFactory {
 			
 			RpcService sendType = method.getDeclaringClass().getAnnotation(RpcService.class);
 			Addition addition = method.getAnnotation(Addition.class);
-			RemoteInfo remoteInfo = new RemoteInfo(sendType.host(), AdditionPropParser.parse(addition),method.getReturnType());
+			RemoteInfo remoteInfo = new RemoteInfo(this.getRealHost(sendType,sendType.host()), AdditionPropParser.parse(addition),method.getReturnType());
 			Encoder targetEncoder = getEncoder(args[0]);
 			Sender targetSender = getSender(sendType);
 			Decoder targetDecoder = getDecoder(method);
@@ -82,6 +84,21 @@ public class RpcProxyFactory {
 				return rlt;
 			}
 			return targetDecoder.decode(rlt, method.getReturnType());
+		}
+
+		private String getRealHost(RpcService sendType,String host) {
+			if(sendType.configHost()==false){
+				return host;
+			}else{
+				RpcHostConfigurer rpcHostConfigurer = SpringContextUtils.getBean(sendType.host(),RpcHostConfigurer.class);
+				if(null==rpcHostConfigurer){
+					throw new RuntimeException("请配置相应的host，并注入");
+				}
+				if(null==rpcHostConfigurer.getServiceHostDomain()){
+					throw new RuntimeException("请配置相应的host，并注入");
+				}
+				return rpcHostConfigurer.getServiceHostDomain();
+			}
 		}
 
 		private Sender getSender(RpcService sendType) {

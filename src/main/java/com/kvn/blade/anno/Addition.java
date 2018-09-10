@@ -20,4 +20,6 @@ public @interface Addition {
 	RequestParamStrategy requestParamType();
 
 	String url();
+
+
 }

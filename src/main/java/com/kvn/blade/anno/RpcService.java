@@ -14,4 +14,5 @@ import java.lang.annotation.Target;
 public @interface RpcService {
 	String protocol();
 	String host();
+	boolean configHost();
 }
