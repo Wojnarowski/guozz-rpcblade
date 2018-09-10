@@ -38,8 +38,7 @@ public class RpcProxyFactory {
 		private static final ExtensionLoader<Encoder> encoder = ExtensionLoader.getExtensionLoader(Encoder.class);
 		private static final ExtensionLoader<Sender> sender = ExtensionLoader.getExtensionLoader(Sender.class);
 		private static final ExtensionLoader<Decoder> decoder = ExtensionLoader.getExtensionLoader(Decoder.class);
-        //private static final ExtensionLoader<HttpSendService> httpServiceSender = ExtensionLoader.getExtensionLoader(HttpSendService.class);
-		
+
 		@Override
 		public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 			String methodName = method.getName();
