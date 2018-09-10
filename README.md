@@ -9,6 +9,8 @@
 
 #### 使用说明
 如果与 Spring 配合使用，则需要先配置 Rpc 组件扫描器：
+
+basePackage的value为你自定义interface的路径
 >>>
     <bean class="com.kvn.blade.scan.RpcScannerConfigurer">
     	<property name="basePackage" value="com.kvn.rpc.service" />
@@ -18,15 +20,23 @@
 
 1. 调用http服务
 ```java
-@RpcService(protocol = "http", host = "couponws")
+@RpcService(protocol = "http", host = "aa",configHost = true)
 public interface HttpRpcService2 {
 	
-	@Addition(requestType = RequestTypeStrategy.POST,requestParamType = RequestParamStrategy.FORM,url ="services/coupon/queryCouponByCouponId")
+	@Addition(requestType = RequestTypeStrategy.POST,
+			  requestParamType = RequestParamStrategy.FORM,
+			  url ="services/coupon/queryCouponByCouponId")
 	Wrapper<CouponResponseDto> queryCouponByCouponId(CouponRequestDto couponRequestDto);
 
 }
 ```
-参考：[HttpRpcService.java](src/test/java/com/kvn/rpc/service/HttpRpcService2.java)
+参考：[HttpRpcService2.java](src/test/java/com/kvn/rpc/service/HttpRpcService2.java)
+如果要自定义配置host则需注入 com.kvn.blade.scan.RpcHostConfigurer类的serviceHostDomain
+```
+<bean id="aa" class="com.kvn.blade.scan.RpcHostConfigurer">
+    <property name="serviceHostDomain" value="couponws" />
+</bean>
+```
 
 2. 调用socket服务
 ```java
