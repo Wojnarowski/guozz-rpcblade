@@ -1,0 +1,4 @@
+httpPostFormSendService=com.kvn.blade.core.sender.support.impl.HttpPostFormSendServiceImpl
+httpPostJsonSendService=com.kvn.blade.core.sender.support.impl.HttpPostJsonSendServiceImpl
+httpGetFormSendService=com.kvn.blade.core.sender.support.impl.HttpGetFormSendServiceImpl
+httpGetJsonSendService=com.kvn.blade.core.sender.support.impl.HttpGetJsonSendServiceImpl

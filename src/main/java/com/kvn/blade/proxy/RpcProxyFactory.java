@@ -10,6 +10,7 @@ import com.kvn.blade.core.RemoteInfo;
 import com.kvn.blade.core.decoder.Decoder;
 import com.kvn.blade.core.encoder.Encoder;
 import com.kvn.blade.core.sender.Sender;
+import com.kvn.blade.core.sender.support.HttpSendService;
 import com.kvn.blade.scan.RpcHostConfigurer;
 import com.kvn.blade.util.AdditionPropParser;
 import org.ipanda.common.utils.config.SpringHelper;
@@ -38,6 +39,7 @@ public class RpcProxyFactory {
 		private static final ExtensionLoader<Encoder> encoder = ExtensionLoader.getExtensionLoader(Encoder.class);
 		private static final ExtensionLoader<Sender> sender = ExtensionLoader.getExtensionLoader(Sender.class);
 		private static final ExtensionLoader<Decoder> decoder = ExtensionLoader.getExtensionLoader(Decoder.class);
+        //private static final ExtensionLoader<HttpSendService> httpServiceSender = ExtensionLoader.getExtensionLoader(HttpSendService.class);
 		
 		@Override
 		public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {

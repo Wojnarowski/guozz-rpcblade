@@ -2,6 +2,7 @@ package com.kvn.blade.core.sender;
 
 import com.alibaba.fastjson.JSON;
 import com.kvn.blade.anno.RequestParamStrategy;
+import com.kvn.blade.core.ExtensionLoader;
 import com.kvn.blade.core.RemoteInfo;
 import com.kvn.blade.core.sender.support.HttpSendService;
 import com.kvn.blade.util.HttpSendServiceEnum;
@@ -21,6 +22,7 @@ public class HttpSender implements Sender {
 	private static final Logger logger = LoggerFactory.getLogger(HttpSender.class);
 	private static final OkHttpClient client = new OkHttpClient();
 	private static final MediaType JSON_TYPE = MediaType.parse("application/json; charset=utf-8");
+	private static final ExtensionLoader<HttpSendService> httpServiceSender = ExtensionLoader.getExtensionLoader(HttpSendService.class);
 
 	@Override
 	public String send(Object obj, RemoteInfo remoteInfo) {
@@ -35,12 +37,12 @@ public class HttpSender implements Sender {
 
 		HttpSendService httpSendService =null;
 		if(requestType == null || "GET".equals(requestType.toUpperCase())){
-			httpSendService=(HttpSendService)SpringHelper.getBean(HttpSendServiceEnum.HttpGetForm.getHttpSendServiceClass());
+			httpSendService=(HttpSendService)httpServiceSender.getExtension(HttpSendServiceEnum.HttpGetForm.getHttpSendServiceClass());
 		} else {
 			if(requestParamType.equals(RequestParamStrategy.FORM.toString())){
-				httpSendService=(HttpSendService)SpringHelper.getBean(HttpSendServiceEnum.HttpPostForm.getHttpSendServiceClass());
+				httpSendService=(HttpSendService)httpServiceSender.getExtension(HttpSendServiceEnum.HttpPostForm.getHttpSendServiceClass());
 			}else{
-				httpSendService=(HttpSendService)SpringHelper.getBean(HttpSendServiceEnum.HttpPostJson.getHttpSendServiceClass());
+				httpSendService=(HttpSendService)httpServiceSender.getExtension(HttpSendServiceEnum.HttpPostJson.getHttpSendServiceClass());
 			}
 
 		}
