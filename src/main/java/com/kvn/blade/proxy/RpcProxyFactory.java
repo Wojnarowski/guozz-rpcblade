@@ -6,6 +6,7 @@ import java.lang.reflect.Proxy;
 
 import com.kvn.blade.scan.RpcHostConfigurer;
 import com.kvn.blade.util.SpringContextUtils;
+import org.ipanda.common.utils.config.SpringHelper;
 import org.ipanda.common.utils.serialize.JsonHelper;
 import org.springframework.util.Assert;
 
@@ -90,7 +91,7 @@ public class RpcProxyFactory {
 			if(sendType.configHost()==false){
 				return host;
 			}else{
-				RpcHostConfigurer rpcHostConfigurer = SpringContextUtils.getBean(sendType.host(),RpcHostConfigurer.class);
+				RpcHostConfigurer rpcHostConfigurer = (RpcHostConfigurer)SpringHelper.getBean(sendType.host());;
 				if(null==rpcHostConfigurer){
 					throw new RuntimeException("请配置相应的host，并注入");
 				}
