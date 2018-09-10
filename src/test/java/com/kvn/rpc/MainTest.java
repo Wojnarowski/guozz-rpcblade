@@ -2,18 +2,20 @@ package com.kvn.rpc;
 
 import javax.annotation.Resource;
 
+import com.czb.coupon.sdk.request.CouponRequest;
 import com.czb.coupon.sdk.response.dto.CouponResponseDto;
 import com.kvn.rpc.dto.*;
-import com.kvn.rpc.service.HttpRpcService2;
+import com.kvn.rpc.service.*;
+import org.ipanda.common.sdk.api.request.dto.PageDto;
 import org.ipanda.common.utils.serialize.JsonHelper;
+import org.ipanda.common.utils.wrap.CommonPageWrapper;
 import org.ipanda.common.utils.wrap.Wrapper;
 import org.junit.Test;
 
 import com.alibaba.fastjson.JSON;
 import com.kvn.SpringBaseTest;
-import com.kvn.rpc.service.HttpRpcService;
-import com.kvn.rpc.service.NettyRpcService;
-import com.kvn.rpc.service.SocketRpcService;
+
+import java.util.List;
 
 /**
 * @author 郭智忠
@@ -28,7 +30,9 @@ public class MainTest extends SpringBaseTest {
 	@Resource
 	private HttpRpcService httpRpcService;
 	@Resource
-	private HttpRpcService2 httpRpcServiceCouponTest;
+	private HttpRpcServicePostForm httpRpcServiceCouponTest;
+	@Resource
+	private HttpRpcServicePostJson httpRpcServicePostJson;
 
 	@Test
 	public void testFactoryBean(){
@@ -66,11 +70,26 @@ public class MainTest extends SpringBaseTest {
 
 
     @Test
-    public void testGetCouponById(){
+    public void testPostForm(){
 		CouponRequestDto dto = new CouponRequestDto();
 		dto.setCouponId(25146);
 		Wrapper<CouponResponseDto> response = httpRpcServiceCouponTest.queryCouponByCouponId(dto);
         System.out.println("===>" + JsonHelper.toJson(response));
     }
+
+	@Test
+	public void testPostJson(){
+		CouponRequest request = new CouponRequest();
+		com.czb.coupon.sdk.request.dto.CouponRequestDto dto = new com.czb.coupon.sdk.request.dto.CouponRequestDto();
+		dto.setUserId(5);
+		request.setContent(dto);
+		PageDto pageDto = new PageDto();
+		pageDto.setPageIndex(1);
+		pageDto.setPageSize(10);
+		request.setPage(pageDto);
+
+		CommonPageWrapper<List<CouponResponseDto>> response = httpRpcServicePostJson.queryListWithPage(request);
+		System.out.println("===>" + JsonHelper.toJson(response));
+	}
 
 }
