@@ -1,2 +1,0 @@
-xml=com.kvn.blade.core.decoder.XmlDecoder
-json=com.kvn.blade.core.decoder.JsonDecoder

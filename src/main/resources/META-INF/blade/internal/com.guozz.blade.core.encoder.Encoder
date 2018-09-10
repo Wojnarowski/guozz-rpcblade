@@ -1,0 +1,3 @@
+xml=com.guozz.blade.core.encoder.XmlEncoder
+json=com.guozz.blade.core.encoder.JsonEncoder
+wrapper=com.guozz.blade.core.encoder.EncoderWrapper

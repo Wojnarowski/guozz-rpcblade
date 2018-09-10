@@ -1,0 +1,3 @@
+netty=com.guozz.blade.core.sender.NettySender
+http=com.guozz.blade.core.sender.HttpSender
+socket=com.guozz.blade.core.sender.SocketSender

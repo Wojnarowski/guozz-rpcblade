@@ -1,0 +1,2 @@
+xml=com.guozz.blade.core.decoder.XmlDecoder
+json=com.guozz.blade.core.decoder.JsonDecoder

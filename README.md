@@ -12,8 +12,8 @@
 
 basePackage的value为你自定义interface的路径
 >>>
-    <bean class="com.kvn.blade.scan.RpcScannerConfigurer">
-    	<property name="basePackage" value="com.kvn.rpc.service" />
+    <bean class="RpcScannerConfigurer">
+    	<property name="basePackage" value="com.guozz.rpc.service" />
     </bean>
 参考：[application.xml](src/test/resources/application.xml)
 
@@ -30,10 +30,10 @@ public interface HttpRpcService2 {
 
 }
 ```
-参考：[HttpRpcService2.java](src/test/java/com/kvn/rpc/service/HttpRpcService2.java)
-如果要自定义配置host则需注入 com.kvn.blade.scan.RpcHostConfigurer类的serviceHostDomain
+参考：[HttpRpcService2.java](src/test/java/com/guozz/rpc/service/HttpRpcService2.java)
+如果要自定义配置host则需注入 com.guozz.blade.scan.RpcHostConfigurer类的serviceHostDomain
 ```
-<bean id="aa" class="com.kvn.blade.scan.RpcHostConfigurer">
+<bean id="aa" class="RpcHostConfigurer">
     <property name="serviceHostDomain" value="couponws" />
 </bean>
 ```
@@ -47,7 +47,7 @@ public interface SocketRpcService {
 
 }
 ```
-参考：[SocketRpcService.java](src/test/java/com/kvn/rpc/service/SocketRpcService.java)
+参考：[SocketRpcService.java](src/test/java/com/guozz/rpc/service/SocketRpcService.java)
 
 3. 调用netty服务
 ```java
@@ -58,4 +58,4 @@ public interface NettyRpcService {
 
 }
 ```
-参考：[NettyRpcService.java](src/test/java/com/kvn/rpc/service/NettyRpcService.java)
+参考：[NettyRpcService.java](src/test/java/com/guozz/rpc/service/NettyRpcService.java)

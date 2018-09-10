@@ -1,0 +1,3 @@
+httpPostFormSendService=com.guozz.blade.core.sender.support.impl.HttpPostFormSendServiceImpl
+httpPostJsonSendService=com.guozz.blade.core.sender.support.impl.HttpPostJsonSendServiceImpl
+httpGetFormSendService=com.guozz.blade.core.sender.support.impl.HttpGetFormSendServiceImpl

@@ -8,7 +8,7 @@
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.kvn.blade</groupId>
+	<groupId>com.guozz.blade</groupId>
 	<artifactId>rpcblade</artifactId>
 	<version>0.0.2-SNAPSHOT</version>
 
