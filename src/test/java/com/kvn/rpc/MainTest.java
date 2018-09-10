@@ -4,6 +4,8 @@ import javax.annotation.Resource;
 
 import com.czb.coupon.sdk.request.CouponRequest;
 import com.czb.coupon.sdk.response.dto.CouponResponseDto;
+import com.czb.gas.sdk.dto.GasInfoDo;
+import com.czb.gas.sdk.dto.OilNumDo;
 import com.kvn.rpc.dto.*;
 import com.kvn.rpc.service.*;
 import org.ipanda.common.sdk.api.request.dto.PageDto;
@@ -33,6 +35,8 @@ public class MainTest extends SpringBaseTest {
 	private HttpRpcServicePostForm httpRpcServiceCouponTest;
 	@Resource
 	private HttpRpcServicePostJson httpRpcServicePostJson;
+	@Resource
+	private HttpRpcServiceGet httpRpcServiceGet;
 
 	@Test
 	public void testFactoryBean(){
@@ -90,6 +94,20 @@ public class MainTest extends SpringBaseTest {
 
 		CommonPageWrapper<List<CouponResponseDto>> response = httpRpcServicePostJson.queryListWithPage(request);
 		System.out.println("===>" + JsonHelper.toJson(response));
+	}
+
+	@Test
+	public void testGetNoParam(){
+		Wrapper<List<OilNumDo>> wrapper = httpRpcServiceGet.getOilNumList();
+		System.out.println("===>" + JsonHelper.toJson(wrapper));
+	}
+
+	@Test
+	public void testGetHaveParam(){
+		GasInfoRequest request = new GasInfoRequest();
+		request.setGasId("my000001126");
+		GasInfoDo gasInfoDo = httpRpcServiceGet.getGasInfoByGasId(request);
+		System.out.println("===>" + JsonHelper.toJson(gasInfoDo));
 	}
 
 }

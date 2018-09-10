@@ -64,7 +64,11 @@ public class RpcProxyFactory {
 			RpcService sendType = method.getDeclaringClass().getAnnotation(RpcService.class);
 			Addition addition = method.getAnnotation(Addition.class);
 			RemoteInfo remoteInfo = new RemoteInfo(this.getRealHost(sendType,sendType.host()), AdditionPropParser.parse(addition),method.getReturnType());
-			Encoder targetEncoder = getEncoder(args[0]);
+			Encoder targetEncoder=null;
+			if(!remoteInfo.getAdditionProps().get("requestType").equals("GET")||(remoteInfo.getAdditionProps().get("requestType").equals("GET")&&args!=null)){
+				targetEncoder = getEncoder(args[0]);
+			}
+
 			Sender targetSender = getSender(sendType);
 			Decoder targetDecoder = getDecoder(method);
 			
@@ -72,10 +76,13 @@ public class RpcProxyFactory {
 			if(targetSender == null){
 				throw new IllegalStateException("不支持的protocol:" + sendType.protocol());
 			}
-			
-			Object msg = args[0];
-			if(targetEncoder != null){
-				msg = targetEncoder.encode(msg);
+
+			Object msg =null;
+			if(!remoteInfo.getAdditionProps().get("requestType").equals("GET")||(remoteInfo.getAdditionProps().get("requestType").equals("GET")&&args!=null)){
+				 msg = args[0];
+				if(targetEncoder != null){
+					msg = targetEncoder.encode(msg);
+				}
 			}
 
 			String rlt = targetSender.send(msg, remoteInfo);

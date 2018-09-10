@@ -163,7 +163,11 @@
 			<artifactId>coupon-service-sdk</artifactId>
 			<version>${coupon-service-sdk.version}</version>
 		</dependency>
-
+		<dependency>
+			<groupId>com.czb.gas</groupId>
+			<artifactId>gas-service-sdk</artifactId>
+			<version>1.2.0-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 

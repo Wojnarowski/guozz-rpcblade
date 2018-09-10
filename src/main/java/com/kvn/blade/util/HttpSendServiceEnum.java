@@ -4,8 +4,8 @@ public enum HttpSendServiceEnum {
 
     HttpPostForm(1,"httpPostFormSendService"),
     HttpPostJson(2,"httpPostJsonSendService"),
-    HttpGetForm(3,"httpGetFormSendService"),
-    HttpGetJson(4,"httpGetJsonSendService");
+    HttpGetForm(3,"httpGetFormSendService");
+
 
     private Integer code;
 
