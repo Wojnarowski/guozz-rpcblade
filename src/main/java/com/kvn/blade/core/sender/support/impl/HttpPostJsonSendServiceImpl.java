@@ -27,7 +27,6 @@ public class HttpPostJsonSendServiceImpl  implements HttpSendService {
                                         .post(requestBody)
                                         .build();
             //创建/Call
-            Call call = client.newCall(request);
             Response response = client.newCall(request).execute();
             if(response.code()==200){
                 return response.body().string();

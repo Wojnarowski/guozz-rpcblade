@@ -34,7 +34,6 @@ public class HttpPostFormSendServiceImpl implements HttpSendService {
                     .post(body)
                     .build();
 
-            Call call = client.newCall(request);
             Response response = client.newCall(request).execute();
             if(response.code()==200){
                 return response.body().string();
